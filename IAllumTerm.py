@@ -1,115 +1,9 @@
 
 from random import randint
 
+from fonctionsIA import *
+from fonctionsJeu import *
 
-#on compte toutes les allumette qu'il y a sur sur le plateau 
-def compteAllumettes (tab):
-    nbAll =0
-    for ligne in tab:
-        if ligne >= 0:
-            nbAll+=ligne
-    return nbAll
-
-#on change de joiueur 
-def changerJoueur(joueur):
-    if  joueur == 1:
-        return 2
-    return 1
-
-
-
-def evalue(plateau, joueur, IA):
-    if compteAllumettes(plateau) == 0 :
-        if joueur == IA :
-            resuVrai = 1
-        else :
-            resuVrai = -1
-    else :
-
-        resuDessous =[]
-        resu = -2
-        if joueur == IA:
-            targetResu  = 1
-        else :
-            targetResu  = -1
-
-        for choixLigne in [0,1,2,3]:
-            for choixNb in [1,2,3]:
-                if (plateau[choixLigne] -choixNb >= 0 and resu != targetResu) :
-                    # on copie le plateau
-                    plateauTemp = [] 
-                    for nb in plateau :
-                        plateauTemp.append(nb)
-                    
-
-                    plateauTemp[choixLigne]-= choixNb
-
-                    resu = evalue(plateauTemp, changerJoueur(joueur),IA)
-
-                    resuDessous.append(resu)                    
-        
-        if joueur == IA:
-            resuVrai = max(resuDessous)
-        else :
-            resuVrai = min(resuDessous)
-
-        #on récupère l'indices d
-    
-    #print (plateau, resuVrai, ligneVraie, nbAllVraie)
-    return resuVrai
-
-def evalueEtChoisit(plateau):
-    bestResult = -2
-    choixBestLigne = -1
-    choixBestNb = -1
-
-    joueur = 1
-    IA = 1
-
-    for choixNb in [1,2,3]:
-        for choixLigne in [0,1,2,3]:
-            
-            if (plateau[choixLigne] - choixNb >= 0) and bestResult < 1 :
-                # on copie le plateau
-                plateauTemp = [] 
-                for nb in plateau :
-                    plateauTemp.append(nb)
-                
-
-                plateauTemp[choixLigne]-= choixNb
-                #print(plateauTemp)
-
-                resu = evalue(plateauTemp, changerJoueur(joueur),IA)
-                #print (resu)
-                if resu >= bestResult :
-                    choixBestLigne = choixLigne
-                    choixBestNb = choixNb
-                    bestResult = resu
-                    #print (bestResult, choixBestLigne, choixBestNb)                    
-    
-    if (bestResult==1) :
-        print("Je gagne")
-    else:
-        print ("je perds si tu joues bien") 
-
-    return choixBestLigne, choixBestNb
-
-
-def afficherLigne(n) :
-	for i in range(n) :
-		print("I", end = "")
-	print("")
-
-
-def compteAllumette(tableau) :
-        somme = tableau[0] + tableau[1] + tableau[2] + tableau[3]
-        return somme 
-
-def afficherTab(tab) :
-	print("")
-	for i in range(len(tab)) :
-		print(i + 1,":  ", end="")
-		afficherLigne(tab[i])
 
 
 
@@ -174,13 +68,13 @@ joueur1 , joueur2 = choix_joueur(joueur1,joueur2)
 while continuer :
     
     Jeu(joueur1, tableau)
-    if compteAllumette(tableau) == 0 :
+    if compteAllumettes(tableau) == 0 :
         continuer = False
         print(joueur1,"vous avez perdu")
 
     if continuer:
         Jeu(joueur2, tableau)
-        if compteAllumette(tableau) == 0 :
+        if compteAllumettes(tableau) == 0 :
             continuer = False
             print(joueur2,"vous avez perdu")
     

@@ -2,7 +2,7 @@ import copy
 
 class Board():
     def __init__(self):
-        self.board = [1 , 3, 5, 7]
+        self.board = [7 , 5, 3, 1]
 
 
     def getBoard (self):

@@ -1,8 +1,8 @@
 import copy
 
 class BasicMinMax():
-    def __init__(self, board):
-        self.nom = "Basic MinMax IA"
+    def __init__(self, board,name):
+        self.nom = "Basic MinMax IA "+ name
         self.board = board
 
 

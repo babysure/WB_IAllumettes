@@ -9,8 +9,11 @@ def main():
     # Creation du plateau Initial (1, 3, 5, 7)
     tableau = Board()
 
-    # Définition des Joueurs (Ici, un humain contre une IA)
+    ## Définition des Joueurs
+    # la ligne suivante pour permet d'avoir un humain contre une IA)
     #players = [HumanPlayer.HumanPlayer(tableau), BasicMinMax.BasicMinMax(tableau)]
+
+    # la ligne suivante pour permet d'avoir une IA contre une IA)
     players = [BasicMinMax.BasicMinMax(tableau,"1"), BasicMinMax.BasicMinMax(tableau,"2")]
 
     # numéro du joueur en cours

@@ -1,7 +1,7 @@
 
 
-from Agents import HumanPlayer
-from Agents import BasicMinMax
+from Agents.HumanPlayer import *
+from Agents.BasicMinMax import *
 from board import Board
 
 def main():
@@ -11,10 +11,10 @@ def main():
 
     ## Définition des Joueurs
     # la ligne suivante pour permet d'avoir un humain contre une IA)
-    #players = [HumanPlayer.HumanPlayer(tableau), BasicMinMax.BasicMinMax(tableau)]
+    #players = [HumanPlayer(tableau), BasicMinMax(tableau)]
 
     # la ligne suivante pour permet d'avoir une IA contre une IA)
-    players = [BasicMinMax.BasicMinMax(tableau,"1"), BasicMinMax.BasicMinMax(tableau,"2")]
+    players = [BasicMinMax(tableau,"1"), BasicMinMax(tableau,"2")]
 
     # numéro du joueur en cours
     numPlayer = 0

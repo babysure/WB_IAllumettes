@@ -54,3 +54,10 @@ class GenericAgent():
         print ("I don't have any strategy, I'll return 1,1")
 
         return 1,1
+
+    def needInputInterface(self):
+        """
+        tell if the Agent needs an input interface to define his strategy
+        only Human agents should set this to True
+        """
+        return False

@@ -3,6 +3,9 @@ from Agents.GenericAgent import *
 from Agents.Human import *
 from Agents.BasicMinMax import *
 
+from Interfaces.ConsoleInterface import *
+from Interfaces.PygameInterface import *
+
 from game import Game
 
 def main():
@@ -17,31 +20,11 @@ def main():
     player = BasicMinMax(game)
     game.addPlayer(player)
 
-    # Début de la partie
-    continuer = True
-    while continuer :
+    # Choix d'une interface pour jouer
+    interface = PygameInterface(game)
 
-        ## Affichage du plateau
-        game.display()
-
-        # On récupere le joueur en cours
-        player = game.getPlayer()
-
-        # Le Joueur choisit ce qu'il veut faire
-        print (player.getName(), " a vous")
-        nbLigne, nbAll = player.chooseStrategy()
-
-        ## retrait des Allumettes
-        game.drawMatches(nbLigne,nbAll)
-
-        ## Changement de joueur
-        game.changePlayer()
-
-        if game.isFinished() :
-            continuer = False
-
-    print("joueur", game.getNumPlayer(),game.getPlayer().getName(),"a gagné ")
-
+    # lancement du jeu
+    interface.play()
 
 
 if __name__ == "__main__":

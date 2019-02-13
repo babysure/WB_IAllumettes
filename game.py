@@ -3,12 +3,12 @@
 import copy
 
 class Game():
-"""The class in charge of a Marienbad Game.
+    """The class in charge of a Marienbad Game.
 
-It handles :
-- players and their turns
-- the board content
-"""
+    It handles :
+    - players and their turns
+    - the board content
+    """
 
     def __init__(self):
         """
@@ -19,6 +19,10 @@ It handles :
         """
         self.board = [7 , 5, 3, 1]
         self.players=[]
+        self.numJoueur = 0
+
+    def newGame(self):
+        self.board = [7 , 5, 3, 1]
         self.numJoueur = 0
 
     def addPlayer(self,player):
@@ -93,20 +97,3 @@ It handles :
             self.board[nbLigne]-=nbCol
         else :
             print ("You tried something bad")
-
-    def afficherLigne(self, n) :
-        for i in range(n) :
-            print("I", end = "")
-        print("")
-
-
-    def display(self) :
-        """
-        display the board
-
-        Should be deported to the interface part.
-        """
-        print("")
-        for i in range(len(self.board)) :
-            print(i + 1,":  ", end="")
-            self.afficherLigne(self.board[i])

@@ -36,8 +36,15 @@ class Human(GenericAgent):
         while   (ligne <= -1) or (ligne >= 4 or tableau[ligne] <= 0)   :
             ligne = int(input("erreur: choisiez une autre ligne : ")) -1
 
-        allumette = int(input("combien d'allumettes voulez vous drawMatches ? :  "))
+        allumette = int(input("combien d'allumettes voulez vous retirer ? :  "))
         while (allumette <=0) or (allumette >= 4) or allumette > tableau[ligne] :
-                allumette = int(input(" erreur: combien d'allumette voulez vous drawMatches ? :  "))
+                allumette = int(input(" erreur: combien d'allumette voulez vous retirer ? :  "))
 
         return ligne, allumette
+
+    def needInputInterface(self):
+        """
+        tell if the Agent needs an input interface to define his strategy
+        only Human agents should set this to True
+        """
+        return True

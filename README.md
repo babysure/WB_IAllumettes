@@ -12,7 +12,8 @@ python main.py
 - *game.py* est la classe en charge de la partie
 (elle affiche, compte des allumettes...)
 - Le repertoire *Agents* contient les fichiers de chaque type de joueur possible.
-Pour le moment, il y en a deux :
+Pour le moment, il y en a trois :
+  - GenericAgent : La classe dont dérivent les autres
   - HumanPlayer : un joueur humain
   - BasicMinMax : une IA simple
 

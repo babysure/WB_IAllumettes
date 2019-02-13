@@ -1,13 +1,19 @@
 import copy
 
-class BasicMinMax():
-    def __init__(self, game,name):
-        self.nom = "Basic MinMax IA "+ name
-        self.game = game
+import sys
+import os
+
+currentDir = os.path.dirname(os.path.abspath(__file__))
+upperDir = os.path.dirname(currentDir)
+sys.path.append(upperDir)
+
+from Agents.GenericAgent import *
 
 
-    def getName(self):
-        return self.nom
+class BasicMinMax(GenericAgent):
+    def __init__(self, game):
+        GenericAgent.__init__(self,game)
+        self.nom = "Basic MinMax IA "
 
     def chooseStrategy(self):
 

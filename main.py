@@ -1,7 +1,8 @@
 
-
-from Agents.HumanPlayer import *
+from Agents.GenericAgent import *
+from Agents.Human import *
 from Agents.BasicMinMax import *
+
 from game import Game
 
 def main():
@@ -11,13 +12,10 @@ def main():
 
     ## Définition des Joueurs
     # la ligne suivante pour permet d'avoir un humain contre une IA)
-    #players = [HumanPlayer(game), BasicMinMax(game)]
 
     # la ligne suivante pour permet d'avoir une IA contre une IA)
-    players = [BasicMinMax(game,"1"), BasicMinMax(game,"2")]
-
-    # numéro du joueur en cours
-    numPlayer = 0
+    game.addPlayer(Human(game))
+    game.addPlayer(BasicMinMax(game))
 
     # Début de la partie
     continuer = True
@@ -26,8 +24,8 @@ def main():
         ## Affichage de la partie
         game.afficher()
 
-        # Le joueur en cours est dans le tableau des joueurs
-        player = players[numPlayer]
+        # On récupere le joueur en cours
+        player = game.getPlayer()
 
         # Le Joueur choisit ce qu'il veut faire
         print (player.getName(), " a vous")
@@ -37,12 +35,12 @@ def main():
         game.retirer(nbLigne,nbAll)
 
         ## Changement de joueur
-        numPlayer = (numPlayer+1)%2
+        game.changePlayer()
 
         if game.estVide() :
             continuer = False
 
-    print(players[numPlayer].getName()," a gagné ")
+    print("joueur", game.getNumPlayer(),game.getPlayer().getName(),"a gagné ")
 
 
 

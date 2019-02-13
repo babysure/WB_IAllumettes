@@ -3,7 +3,26 @@ import copy
 class Game():
     def __init__(self):
         self.board = [7 , 5, 3, 1]
+        self.players=[]
+        self.numJoueur = 0
 
+    def addPlayer(self,player):
+
+        if len(self.players) <= 2 :
+            # La partie fixe le numéro du joueur
+            player.setNum(len(self.players))
+            self.players.append(player)
+        else :
+            print("Pas plus de deux joueurs !")
+
+    def changePlayer(self):
+        self.numJoueur = (self.numJoueur+1)%2
+
+    def getPlayer(self):
+        return self.players[self.numJoueur]
+
+    def getNumPlayer(self):
+        return self.numJoueur+1
 
     def getBoard (self):
         newBoard = copy.deepcopy(self.board)

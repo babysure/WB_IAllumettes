@@ -16,8 +16,12 @@ Pour le moment, il y en a trois :
   - GenericAgent : La classe dont dérivent les autres
   - HumanPlayer : un joueur humain
   - BasicMinMax : une IA simple
-
 Je compte bien ajouter une IA utilisant des reseaux de neurones sous peu...
+- Le repertoire *Interfaces* contient les fichiers de chaque type d'interface possible.
+Pour le moment, il y en a deux :
+  - ConsoleInterface : le jeu s'affiche en ligne de commande
+  - PygameInterface : le jeu utilise une interface pygame
+
 
 ## Les Agents (types de joueurs) :
 

@@ -1,6 +1,6 @@
 import copy
 
-class Board():
+class Game():
     def __init__(self):
         self.board = [7 , 5, 3, 1]
 

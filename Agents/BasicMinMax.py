@@ -1,9 +1,9 @@
 import copy
 
 class BasicMinMax():
-    def __init__(self, board,name):
+    def __init__(self, game,name):
         self.nom = "Basic MinMax IA "+ name
-        self.board = board
+        self.game = game
 
 
     def getName(self):
@@ -15,7 +15,7 @@ class BasicMinMax():
         choixBestLigne = -1
         choixBestNb = -1
 
-        tableau = self.board.getBoard()
+        tableau = self.game.getBoard()
         ## Am I playing ? (sure)
         me = True
 
@@ -48,7 +48,7 @@ class BasicMinMax():
         return choixBestLigne, choixBestNb
 
     def evaluate(self, plateau, me):
-        if self.board.estVide(plateau) :
+        if self.game.estVide(plateau) :
             if me :
                 resuVrai = 1
             else :

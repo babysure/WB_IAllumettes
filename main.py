@@ -2,19 +2,19 @@
 
 from Agents.HumanPlayer import *
 from Agents.BasicMinMax import *
-from board import Board
+from game import Game
 
 def main():
 
     # Creation du plateau Initial (1, 3, 5, 7)
-    tableau = Board()
+    game = Game()
 
     ## Définition des Joueurs
     # la ligne suivante pour permet d'avoir un humain contre une IA)
-    #players = [HumanPlayer(tableau), BasicMinMax(tableau)]
+    #players = [HumanPlayer(game), BasicMinMax(game)]
 
     # la ligne suivante pour permet d'avoir une IA contre une IA)
-    players = [BasicMinMax(tableau,"1"), BasicMinMax(tableau,"2")]
+    players = [BasicMinMax(game,"1"), BasicMinMax(game,"2")]
 
     # numéro du joueur en cours
     numPlayer = 0
@@ -23,8 +23,8 @@ def main():
     continuer = True
     while continuer :
 
-        ## Affichage du tableau
-        tableau.afficher()
+        ## Affichage de la partie
+        game.afficher()
 
         # Le joueur en cours est dans le tableau des joueurs
         player = players[numPlayer]
@@ -34,12 +34,12 @@ def main():
         nbLigne, nbAll = player.chooseStrategy()
 
         ## retrait des Allumettes
-        tableau.retirer(nbLigne,nbAll)
+        game.retirer(nbLigne,nbAll)
 
         ## Changement de joueur
         numPlayer = (numPlayer+1)%2
 
-        if tableau.estVide() :
+        if game.estVide() :
             continuer = False
 
     print(players[numPlayer].getName()," a gagné ")

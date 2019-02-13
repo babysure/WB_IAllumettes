@@ -9,7 +9,7 @@ python main.py
 ## Organisation du dépôt
 
 - *main.py* contient le code du jeu des Allumettes
-- *board.py* est la classe en charge de la gestion du plateau de jeu
+- *game.py* est la classe en charge de la partie
 (elle affiche, compte des allumettes...)
 - Le repertoire *Agents* contient les fichiers de chaque type de joueur possible.
 Pour le moment, il y en a deux :

@@ -1,7 +1,7 @@
 class HumanPlayer():
-    def __init__(self,board):
+    def __init__(self,game):
         self.nom = input("comment vous  appellez-vous ?")
-        self.board = board
+        self.game = game
 
 
     def getName(self):
@@ -9,7 +9,7 @@ class HumanPlayer():
 
     def chooseStrategy(self):
 
-        tableau = self.board.getBoard()
+        tableau = self.game.getBoard()
 
         ligne = int(input("vous voulez jouer sur la ligne : ")) -1
         while   (ligne <= -1) or (ligne >= 4 )   :

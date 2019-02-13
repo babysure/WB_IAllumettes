@@ -1,17 +1,17 @@
-"""The Parent Class of all Agents
-An Agent is a player, either an IA or a human player.
-It is involved in a Game and must be created with one existing game.
 
-An Agent has :
-- a name
-- a number as a player (given by its insertion in a Game)
-
-Every Agent should define its own strategy
-
-"""
 
 
 class GenericAgent():
+    """The parent class of all Agents
+    An Agent is a player, either an IA or a human player.
+    It is involved in a Game and must be created with one existing game.
+
+    An Agent has :
+    - a name
+    - a number as a player (given by its insertion in a Game)
+
+    Every Agent should define its own strategy
+    """
     def __init__(self, game):
         """
         Create a Generic Agent involved in a Game

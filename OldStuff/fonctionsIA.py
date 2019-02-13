@@ -4,7 +4,7 @@ from fonctionsJeu import *
 
 
 def evalue(plateau, joueur, IA):
-    if compteAllumettes(plateau) == 0 :
+    if countMatches(plateau) == 0 :
         if joueur == IA :
             resuVrai = 1
         else :

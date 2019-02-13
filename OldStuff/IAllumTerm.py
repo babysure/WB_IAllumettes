@@ -8,8 +8,8 @@ from fonctionsJeu import *
 
 
 def Jeu(Joueur, tableau):
-    
-    
+
+
     if Joueur != "IA":
         print("")
         print(Joueur,"c'est à vous")
@@ -23,23 +23,23 @@ def Jeu(Joueur, tableau):
 
 
 
-        allumette = int(input("combien d'allumette voulez vous retirer ? :  "))
+        allumette = int(input("combien d'allumette voulez vous drawMatches ? :  "))
         while (allumette <=0) or (allumette >= 4) :
-                allumette = int(input(" erreur: combien d'allumette voulez vous retirer ? :  "))
+                allumette = int(input(" erreur: combien d'allumette voulez vous drawMatches ? :  "))
 
         while allumette > tableau[ligne] :
-                allumette = int(input(" erreur: combien d'allumette voulez vous retirer ? :  "))
+                allumette = int(input(" erreur: combien d'allumette voulez vous drawMatches ? :  "))
     else:
         ligne , allumette = evalueEtChoisit(tableau)
         print("je retire ", allumette," sur la ligne ", ligne +1)
 
 
 
-    
+
     tableau[ligne] = tableau[ligne] - allumette
     afficherTab(tableau)
     #si c'est l'IA qui joue
-    
+
 
 
 
@@ -66,19 +66,14 @@ joueur1 , joueur2 = choix_joueur(joueur1,joueur2)
 
 
 while continuer :
-    
+
     Jeu(joueur1, tableau)
-    if compteAllumettes(tableau) == 0 :
+    if countMatches(tableau) == 0 :
         continuer = False
         print(joueur1,"vous avez perdu")
 
     if continuer:
         Jeu(joueur2, tableau)
-        if compteAllumettes(tableau) == 0 :
+        if countMatches(tableau) == 0 :
             continuer = False
             print(joueur2,"vous avez perdu")
-    
-       
-
-
-

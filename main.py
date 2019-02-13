@@ -7,22 +7,22 @@ from game import Game
 
 def main():
 
-    # Creation du plateau Initial (1, 3, 5, 7)
+    # Création de la partie (initialisation, tout ca)
     game = Game()
 
-    ## Définition des Joueurs
-    # la ligne suivante pour permet d'avoir un humain contre une IA)
+    ## Création des Joueurs et ajout des joueurs a la partie
+    player = Human(game)
+    game.addPlayer(player)
 
-    # la ligne suivante pour permet d'avoir une IA contre une IA)
-    game.addPlayer(Human(game))
-    game.addPlayer(BasicMinMax(game))
+    player = BasicMinMax(game)
+    game.addPlayer(player)
 
     # Début de la partie
     continuer = True
     while continuer :
 
-        ## Affichage de la partie
-        game.afficher()
+        ## Affichage du plateau
+        game.display()
 
         # On récupere le joueur en cours
         player = game.getPlayer()
@@ -32,12 +32,12 @@ def main():
         nbLigne, nbAll = player.chooseStrategy()
 
         ## retrait des Allumettes
-        game.retirer(nbLigne,nbAll)
+        game.drawMatches(nbLigne,nbAll)
 
         ## Changement de joueur
         game.changePlayer()
 
-        if game.estVide() :
+        if game.isFinished() :
             continuer = False
 
     print("joueur", game.getNumPlayer(),game.getPlayer().getName(),"a gagné ")

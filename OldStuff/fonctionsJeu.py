@@ -1,7 +1,7 @@
 
 
 #on compte toutes les allumette qu'il y a sur sur le plateau 
-def compteAllumettes (tab):
+def countMatches (tab):
     nbAll =0
     for ligne in tab:
         if ligne >= 0:

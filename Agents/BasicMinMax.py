@@ -11,12 +11,23 @@ from Agents.GenericAgent import *
 
 
 class BasicMinMax(GenericAgent):
+    """The class for a Pure Tree IA using Min Max Strategy
+
+    """
     def __init__(self, game):
+        """
+        Create a BasicMinMax.
+        it's name is defined as "Basic MinMax IA"
+        """
         GenericAgent.__init__(self,game)
-        self.nom = "Basic MinMax IA "
+        self.setName("Basic MinMax IA")
 
     def chooseStrategy(self):
+        """
+        Ask the IA what it wants to play (line and number of matches)
 
+        I should probably explain how it works...
+        """
         bestResult = -2
         choixBestLigne = -1
         choixBestNb = -1
@@ -54,7 +65,12 @@ class BasicMinMax(GenericAgent):
         return choixBestLigne, choixBestNb
 
     def evaluate(self, plateau, me):
-        if self.game.estVide(plateau) :
+        """
+        Internal evaluation of sub configurations of the game. Yep, recursive.
+
+        I should probably explain how it works...
+        """
+        if self.game.isFinished(plateau) :
             if me :
                 resuVrai = 1
             else :

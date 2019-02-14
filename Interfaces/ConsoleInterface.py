@@ -13,6 +13,15 @@ class ConsoleInterface():
             print("I", end = "")
         print("")
 
+    def waitForStrategy(self):
+        line = int(input("vous voulez jouer sur la ligne : ")) -1
+        nbMatches = int(input("combien d'allumettes voulez vous retirer ? :  "))
+        while not self.game.isValidStrategy(line, nbMatches) :
+            print ("Erreur : choix non valide, ")
+            line = int(input("choisiez une ligne : ")) -1
+            nbMatches = int(input(" combien d'allumette voulez vous retirer ? :  "))
+
+        return line, nbMatches
 
     def displayBoard(self) :
         """

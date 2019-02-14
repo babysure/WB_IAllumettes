@@ -5,6 +5,7 @@ class GenericAgent():
     """The parent class of all Agents
     An Agent is a player, either an IA or a human player.
     It is involved in a Game and must be created with one existing game.
+    It is given an interface to communicate with.
 
     An Agent has :
     - a name
@@ -12,13 +13,14 @@ class GenericAgent():
 
     Every Agent should define its own strategy
     """
-    def __init__(self, game):
+    def __init__(self, game,interface):
         """
         Create a Generic Agent involved in a Game
         """
         self.name = "I'm generic. I should not be used "
         self.game = game  # the player is involved in this game"""
         self.num = -2     # Number of the player in the game (0 or 1)"""
+        self.interface = interface
 
     def setNum(self,num):
         """

@@ -13,15 +13,17 @@ def main():
     # Création de la partie (initialisation, tout ca)
     game = Game()
 
-    ## Création des Joueurs et ajout des joueurs a la partie
-    player = Human(game)
-    game.addPlayer(player)
-
-    player = BasicMinMax(game)
-    game.addPlayer(player)
-
     # Choix d'une interface pour jouer
-    interface = PygameInterface(game)
+    interface = ConsoleInterface(game)
+
+    ## Création des Joueurs et ajout des joueurs a la partie
+    player = Human(game,interface)
+    game.addPlayer(player)
+
+    player = BasicMinMax(game,interface)
+    game.addPlayer(player)
+
+
 
     # lancement du jeu
     interface.play()

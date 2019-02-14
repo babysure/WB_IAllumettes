@@ -14,12 +14,12 @@ class BasicMinMax(GenericAgent):
     """The class for a Pure Tree IA using Min Max Strategy
 
     """
-    def __init__(self, game):
+    def __init__(self, game, interface):
         """
         Create a BasicMinMax.
         it's name is defined as "Basic MinMax IA"
         """
-        GenericAgent.__init__(self,game)
+        GenericAgent.__init__(self,game,interface)
         self.setName("Basic MinMax IA")
 
     def chooseStrategy(self):

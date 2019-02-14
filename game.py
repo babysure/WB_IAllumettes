@@ -37,7 +37,7 @@ class Game():
             player.setNum(len(self.players))
             self.players.append(player)
         else :
-            print("Pas plus de deux joueurs !")
+            print("No more than 2 players !")
 
     def changePlayer(self):
         """
@@ -65,6 +65,47 @@ class Game():
         newBoard = copy.deepcopy(self.board)
         return newBoard
 
+    def getValidNextStrategies (self, board=None):
+        """
+        get an array of all possible strategy for the current state of the Board
+        Each Strategy is a tuple containing (numLine, nbMatches)
+
+        One could ask the ValidStrategies for a different board. If so,
+        pass the board as a parameter
+        """
+        if board == None :
+            board = self.board
+
+        strategies = []
+        for nbMatches in [1,2,3]:
+            for line in [0,1,2,3]:
+                if board[line] - nbMatches >= 0 :
+                    strategies.append((line, nbMatches))
+
+        return strategies
+
+    def isValidStrategy (self, line, nbMatches, board=None):
+        """
+        test if a strategy is valid for the current state of the Board
+
+        One could ask if a strategy is valid for a different board. If so,
+        pass the board as a parameter
+        """
+        if board == None :
+            board = self.board
+
+        if (line < 0 or line >=4):
+            return False
+
+        if nbMatches < 1 or nbMatches >3 :
+            return False
+
+        if board[line]-nbMatches < 0:
+            return False
+
+        return True
+
+
     def isFinished (self, tab=None):
         """
         Tell if the game is finished or not
@@ -87,13 +128,13 @@ class Game():
                 nbAll+=ligne
         return nbAll
 
-    def drawMatches (self, nbLigne, nbCol):
+    def drawMatches (self, line, nbMatches):
         """
-        Draw some matches on the board.
+        Draw some matches on the current board.
 
-        It should check if the proposal is valid.
+        It check if the proposal is valid.
         """
-        if (self.board[nbLigne] >= nbCol) :
-            self.board[nbLigne]-=nbCol
+        if (self.isValidStrategy(line, nbMatches)) :
+            self.board[line]-=nbMatches
         else :
             print ("You tried something bad")

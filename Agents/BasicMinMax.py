@@ -33,27 +33,32 @@ class BasicMinMax(GenericAgent):
         choixBestNb = -1
 
         tableau = self.game.getBoard()
+
         ## Am I playing ? (sure)
         me = True
 
-        for choixNb in [1,2,3]:
-            for choixLigne in [0,1,2,3]:
+        strategies = self.game.getValidNextStrategies()
 
-                if (tableau[choixLigne] - choixNb >= 0) and bestResult < 1 :
-                    # on copie le plateau
-                    plateauTemp = copy.deepcopy(tableau)
+        for strategy in strategies :
+            line = strategy[0]
+            nbMatches = strategy[1]
 
-                    plateauTemp[choixLigne]-= choixNb
-                    #print(plateauTemp)
+            if bestResult < 1 :
+                # on copie le plateau
+                plateauTemp = copy.deepcopy(tableau)
 
-                    # calling evaluation and I won't play
-                    resu = self.evaluate(plateauTemp, not me )
-                    #print (resu)
-                    if resu > bestResult :
-                        choixBestLigne = choixLigne
-                        choixBestNb = choixNb
-                        bestResult = resu
-                        #print (bestResult, choixBestLigne, choixBestNb)
+                plateauTemp[line]-= nbMatches
+                #print(plateauTemp)
+
+                # calling evaluation and I won't play
+                resu = self.evaluate(plateauTemp, not me )
+
+                #print (resu)
+                if resu > bestResult :
+                    choixBestLigne = line
+                    choixBestNb = nbMatches
+                    bestResult = resu
+                    #print (bestResult, choixBestLigne, choixBestNb)
 
         print("je retire ", choixBestNb, " sur la ligne ",choixBestLigne+1, "et ")
 
@@ -84,17 +89,21 @@ class BasicMinMax(GenericAgent):
             else :
                 targetResu  = -1
 
-            for choixLigne in [0,1,2,3]:
-                for choixNb in [1,2,3]:
-                    if (plateau[choixLigne] -choixNb >= 0 and resu != targetResu) :
-                        # on copie le plateau
-                        plateauTemp = copy.deepcopy(plateau)
+            strategies = self.game.getValidNextStrategies(plateau)
 
-                        plateauTemp[choixLigne]-= choixNb
+            for strategy in strategies :
+                line = strategy[0]
+                nbMatches = strategy[1]
 
-                        resu = self.evaluate(plateauTemp, not me)
+                if resu != targetResu :
+                    # on copie le plateau
+                    plateauTemp = copy.deepcopy(plateau)
 
-                        resuDessous.append(resu)
+                    plateauTemp[line]-= nbMatches
+
+                    resu = self.evaluate(plateauTemp, not me)
+
+                    resuDessous.append(resu)
 
             if me:
                 resuVrai = max(resuDessous)

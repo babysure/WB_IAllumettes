@@ -33,17 +33,20 @@ class PygameInterface():
         self.rectButtons = self.afficher(plateau,self.images, numJoueur,fini)
 
 
-
+    def waitForStrategy(self):
+        """
+        In this case, we just pass cause the interface is waiting for a click
+        the will send the agent its strategy
+        """
+        #print ("I'm waiting for your décision")
+        pass
 
     def play(self):
 
-        fini = self.game.isFinished()
-        numJoueur = self.game.getNumPlayer()
-
-        plateau = self.game.getBoard()
-
         # Boucle des tours de jeu
         horloge = pygame.time.Clock()
+
+        plateau = self.game.getBoard()
 
         while self.quitGame == False:
             # on fixe la cadence
@@ -55,36 +58,40 @@ class PygameInterface():
             # on r�cup�re aussi l'�tat des touches pour plus tard.
             touches = pygame.key.get_pressed();
 
-            player = self.game.getPlayer()
+
 
             # Quand on joue (sinon, on est entre deux parties)
             if not self.game.isFinished():
 
+                # On recupere le joueur en cours
+                player = self.game.getPlayer()
 
-                if player.needInputInterface():
-                    # On vide la pile d'evenements et on verifie certains evenements
-                    for event in allEvents:   # parcours de la liste des evenements recus
+                # Get the User Strategy
+                strat = player.chooseStrategy()
+                if strat == None:
+                    # The player is waiting to define his strategy
 
-                        if event.type == pygame.MOUSEBUTTONUP:     #Si on relache la souris
-                            ## on va parcourir les rectangles pour savoir lequel a �t� cliqu�
+                    # Let see if the user has chosen a strategy
+                    if player.needInputInterface():
+                        self.checkInputStrategy(allEvents)
+                    else :
+                        print ("This should not happen right now. IA answers !")
 
-                            for i in range(len(plateau)):
-                                for j in range(len(self.rectButtons[i])):
-                                    if self.rectButtons[i][j].collidepoint(event.pos):
-                                        #print "choix : ligne ",i, "nb all ", j
-                                        numLigne = i
-                                        nbAllumettes = j+1
-                                        self.game.drawMatches(numLigne,nbAllumettes)
-                                        plateau = self.game.getBoard()
-
-                                        self.game.changePlayer()
                 else :
-                    ## This is an IA playing
-                    nbLigne, nbAll = player.chooseStrategy()
-                    self.game.drawMatches(nbLigne,nbAll)
+                    # The player has chosen
+                    line = strat[0]
+                    nbMatches = strat[1]
+
+                    # Draw the matches
+                    self.game.drawMatches(line,nbMatches)
+
+                    # Refresh the board
                     plateau = self.game.getBoard()
 
+                    # Change Player
                     self.game.changePlayer()
+
+                    # Ready for next turn
 
 
             else :  #(entre deux parties)
@@ -100,15 +107,32 @@ class PygameInterface():
             # quoi qu'il en soit, on affiche le plateau
             self.rectButtons = self.afficher(plateau,self.images,numJoueur, fini)
 
-
-
-            # et on v�rifie si on a voulu quitter
-            for event in allEvents:   # parcours de la liste des evenements recus
-                    if event.type == pygame.QUIT:     #Si un de ces evenements est de type QUIT
-                        self.quitGame = True
+            self.checkForQuit(allEvents)
 
         pygame.quit()
 
+
+    def checkForQuit(self,allEvents):
+        # et on v�rifie si on a voulu quitter
+        for event in allEvents:   # parcours de la liste des evenements recus
+                if event.type == pygame.QUIT:     #Si un de ces evenements est de type QUIT
+                    self.quitGame = True
+
+
+    def checkInputStrategy(self,allEvents):
+        for event in allEvents:   # parcours de la liste des evenements recus
+
+            if event.type == pygame.MOUSEBUTTONUP:     #Si on relache la souris
+                ## on va parcourir les rectangles pour savoir lequel a �t� cliqu�
+
+                for i in range(4):
+                    for j in range(len(self.rectButtons[i])):
+                        if self.rectButtons[i][j].collidepoint(event.pos):
+                            #print "choix : ligne ",i, "nb all ", j
+
+                            line = i
+                            nbMatches = j+1
+                            self.game.getPlayer().sendStrategy(line,nbMatches)
 
     ## La fonction d'affichage du plateau
     def afficher(self,tab, images,numJoueur, fini):

@@ -14,7 +14,7 @@ def main():
     game = Game()
 
     # Choix d'une interface pour jouer
-    interface = ConsoleInterface(game)
+    interface = PygameInterface(game)
 
     ## Création des Joueurs et ajout des joueurs a la partie
     player = Human(game,interface)

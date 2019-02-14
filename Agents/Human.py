@@ -22,6 +22,10 @@ class Human(GenericAgent):
         """
         GenericAgent.__init__(self,game,interface)
         self.nom = input("comment vous  appellez-vous ?")
+        self.strategyDefined = False
+        self.line = -1  # The line chosen by the agent
+        self.nbMatches = -1 # The number of matches chosen by the agent
+
 
     def chooseStrategy(self):
         """
@@ -30,11 +34,25 @@ class Human(GenericAgent):
 
         Returns line, nbMatches
         """
+        if self.strategyDefined == True :
+            self.strategyDefined = False
+            return self.line, self.nbMatches
+        else :
+            self.interface.waitForStrategy()
 
-        tableau = self.game.getBoard()
-        line, nbMatches = self.interface.waitForStrategy()
+        return None
 
-        return line, nbMatches
+    def sendStrategy(self, line, nbMatches):
+        """
+        this should be called by the interface to signal the fact that the user
+        has made it choice and given a strategy.
+
+        """
+
+        self.line = line
+        self.nbMatches = nbMatches
+        self.strategyDefined = True
+
 
     def needInputInterface(self):
         """

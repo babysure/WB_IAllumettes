@@ -2,6 +2,8 @@
 from Agents.GenericAgent import *
 from Agents.Human import *
 from Agents.BasicMinMax import *
+from Agents.RandomAgent import *
+
 
 from Interfaces.ConsoleInterface import *
 from Interfaces.PygameInterface import *
@@ -20,7 +22,7 @@ def main():
     player = Human(game,interface)
     game.addPlayer(player)
 
-    player = BasicMinMax(game,interface)
+    player = RandomAgent(game,interface)
     game.addPlayer(player)
 
 

@@ -16,6 +16,8 @@ Pour le moment, il y en a trois :
   - GenericAgent : La classe dont dérivent les autres
   - HumanPlayer : un joueur humain
   - BasicMinMax : une IA simple
+  - RandomAgent : une IA qui joue au hasard
+
 Je compte bien ajouter une IA utilisant des reseaux de neurones sous peu...
 - Le repertoire *Interfaces* contient les fichiers de chaque type d'interface possible.
 Pour le moment, il y en a deux :

@@ -26,11 +26,8 @@ class PygameInterface():
         self.eventQuit = False
         self.quitGame = False
 
-        fini = self.game.isFinished()
-        numJoueur = self.game.getNumPlayer()
 
         plateau = self.game.getBoard()
-        self.rectButtons = self.afficher(plateau,self.images, numJoueur,fini)
 
 
     def waitForStrategy(self):
@@ -101,11 +98,11 @@ class PygameInterface():
 
                     fini = False
 
-            fini = self.game.isFinished()
-            numJoueur = self.game.getNumPlayer()
+
+
 
             # quoi qu'il en soit, on affiche le plateau
-            self.rectButtons = self.afficher(plateau,self.images,numJoueur, fini)
+            self.afficher(plateau)
 
             self.checkForQuit(allEvents)
 
@@ -135,25 +132,30 @@ class PygameInterface():
                             self.game.getPlayer().sendStrategy(line,nbMatches)
 
     ## La fonction d'affichage du plateau
-    def afficher(self,tab, images,numJoueur, fini):
+    def afficher(self,tab):
+
+        fini = self.game.isFinished()
+        player = self.game.getPlayer()
+        images = self.images
+
         # Choix de la police pour le texte
-        font = pygame.font.Font(None, 34)
+        font = pygame.font.Font(None, 24)
 
         # Affichage du fond
         rectFond = self.images["fond"].get_rect()
         self.fenetre.blit(images["fond"], rectFond)
 
         # Affichage du num�ro du joueur
-        imageText = font.render("Joueur "+str(numJoueur), True, (255, 0, 0))
+        imageText = font.render("Joueur "+str(self.game.getNumPlayer())+": "+player.getName(), True, (255, 0, 0))
         rectText = imageText.get_rect()
-        rectText.x = 500
+        rectText.right = self.largeur -10
         rectText.y = 30
         self.fenetre.blit(imageText, rectText)
 
         if fini :
             imageText = font.render("gagne !", True, (255, 0, 0))
             rectText = imageText.get_rect()
-            rectText.x = 500
+            rectText.right = self.largeur -10
             rectText.y = 60
             self.fenetre.blit(imageText, rectText)
 
@@ -163,7 +165,7 @@ class PygameInterface():
             rectText.centery = self.hauteur/2
             self.fenetre.blit(imageText, rectText)
 
-        xOffset = 200
+        xOffset = 150
         # affichage des allumettes
         rectAllu = self.images["allumette"].get_rect()
 
@@ -201,6 +203,4 @@ class PygameInterface():
         # raffraichissement
         pygame.display.flip()
 
-
-
-        return rectChoix
+        self.rectButtons =rectChoix

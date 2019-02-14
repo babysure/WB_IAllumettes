@@ -46,7 +46,6 @@ class Human(GenericAgent):
         """
         this should be called by the interface to signal the fact that the user
         has made it choice and given a strategy.
-
         """
 
         self.line = line

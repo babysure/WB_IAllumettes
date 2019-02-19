@@ -27,7 +27,8 @@ class RandomAgent(GenericAgent):
         """
         Ask the IA what it wants to play (line and number of matches)
 
-        I should probably explain how it works...
+        It just draw a number of line and number of matches at random among all
+        the valid possibilities
         """
 
         # Get all possible choices

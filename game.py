@@ -22,7 +22,7 @@ class Game():
         self.numJoueur = 0
 
     def newGame(self):
-        self.board = [7 , 5, 3, 1]
+        self.board = self.getInitialBoard()
         self.numJoueur = 0
 
     def addPlayer(self,player):
@@ -64,6 +64,13 @@ class Game():
         """
         newBoard = copy.deepcopy(self.board)
         return newBoard
+
+    def getInitialBoard (self):
+        """
+        get an initial board copy of the array that represents the board content.
+        """
+
+        return [7,5,3,1]
 
     def getValidNextStrategies (self, board=None):
         """

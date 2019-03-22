@@ -17,3 +17,6 @@ board = [6,4,3,1]
 player = 1
 print (board, player)
 print(m.make_feature_vector(board, player))
+
+resu = m.evaluate(board, player)
+print (resu)

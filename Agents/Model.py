@@ -11,6 +11,8 @@ class Model:
         input_dim = sum (self.initialBoard) + 1
         self.input_dim = input_dim
 
+        self.sess = None
+
         with tf.variable_scope('model'):
             self.feature_vector_ = tf.placeholder(tf.float32,
                                                   shape=[None, input_dim],
@@ -44,3 +46,16 @@ class Model:
 
         fv[0,-1] = float(player)
         return fv
+
+    def evaluate(self,board, numPlayer):
+        log_dir = "Bidon"
+        with tf.train.SingularMonitoredSession(checkpoint_dir=log_dir) as sess:
+            self.sess = sess
+            feature_vectors = np.vstack(
+                [self.make_feature_vector(board,numPlayer)])
+
+            values = self.sess.run(self.value,
+                                   feed_dict={
+                                        self.feature_vector_: feature_vectors})
+
+            return values[0]
